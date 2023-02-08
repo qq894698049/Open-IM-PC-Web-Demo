@@ -28,7 +28,7 @@ request.interceptors.response.use( (response) => {
     // return Promise.reject(new Error(res.errMsg || '操作失败，请稍后再试！'))
     return Promise.reject(res)
   }
-  
+
 }, handleError);
 
 export default request

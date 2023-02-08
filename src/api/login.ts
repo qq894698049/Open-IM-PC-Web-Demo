@@ -48,7 +48,14 @@ export const modify = (userID: string, currentPassword: string, newPassword: str
   request.post("/account/change_password", JSON.stringify({ userID, currentPassword, newPassword, operationID: Date.now() + "" }));
 
 export const login = (phoneNumber: string, areaCode: string, password?: string, verificationCode?: string) => {
-  return request.post("/account/login", JSON.stringify({ phoneNumber, areaCode: getAreaCode(areaCode), password,verificationCode, platform, operationID: Date.now() + "" }));
+  const form = new FormData();
+  form.append("phoneNumber", phoneNumber);
+  if (password) {
+    form.append("password", password);
+  }
+  form.append("platform", platform + "");
+  form.append("operationID", Date.now() + "");
+  return request.post("/demo/login", form);
 };
 
 export const updateSelfInfo = (params: Partial<FullUserItem>) => {
